@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { scanRoutes } from '@/routes'
+import { scanRoutes } from '@routes'
 
 const app = new Elysia({ prefix: '/api' })
   .use(scanRoutes)
