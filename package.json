@@ -7,7 +7,10 @@
   },
   "dependencies": {
     "@google-cloud/documentai": "^8.2.0",
-    "elysia": "latest"
+    "@google-cloud/vertexai": "^0.5.0",
+    "elysia": "latest",
+    "firebase": "^10.10.0",
+    "firebase-admin": "^12.0.0"
   },
   "devDependencies": {
     "bun-types": "latest"
