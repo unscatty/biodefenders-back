@@ -9,10 +9,13 @@ const {
   FIREBASE_PROJECT_ID,
 } = process.env
 
+const base64DecodedKey = Buffer.from(FIREBASE_PRIVATE_KEY!, 'base64').toString().replace(/\\n/g, '\n')
+
 const appCert = cert({
   projectId: FIREBASE_PROJECT_ID,
   clientEmail: FIREBASE_CLIENT_EMAIL,
-  privateKey: FIREBASE_PRIVATE_KEY,
+  // Decode the private key from base64
+  privateKey: base64DecodedKey,
 })
 
 const appOptions: AppOptions = {
