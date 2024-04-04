@@ -12,7 +12,7 @@ export const initialQuestionsRoutes = new Elysia()
     const response = await generateQuestionsRecommendations(body)
 
     if (!response) {
-      return { message: 'Se han guardado correctamente las respuestas', initialQuestionsId }
+      return { success: true, message: 'Se han guardado correctamente las respuestas', initialQuestionsId }
     }
 
     // Save recommendations to Firestore
@@ -21,7 +21,7 @@ export const initialQuestionsRoutes = new Elysia()
     const recommendationsSaved = await addRecommendations(recommendations)
     const recomendationsId = recommendationsSaved.id
 
-    return { message: 'Se han guardado correctamente las respuestas', initialQuestionsId, recomendationsId, ...response }
+    return { success: true, message: 'Se han guardado correctamente las respuestas', initialQuestionsId, recomendationsId, ...response }
   },
     {
       body: t.Array(
