@@ -1,3 +1,5 @@
+import json from 'json5'
+
 export const extractNumber = (text: string): number => {
   const floatRegex = /(\d+(\.\d+)?)/
   const numberMatch = text.match(floatRegex)
@@ -23,4 +25,21 @@ export const extractTime = (text: string): string => {
 
   // Return the matched time
   return timeMatch[0]
+}
+
+export const extractJsonFromText = (text: string): Record<string, any> | null => {
+  const regex = /{[^]*}/
+  // const regex = /{.*?}/;
+
+  const match = text.match(regex)
+
+  if (!match) {
+    return null
+  }
+
+  try {
+    return json.parse(match[0])
+  } catch (error) {
+    return null
+  }
 }

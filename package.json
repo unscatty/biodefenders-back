@@ -10,7 +10,8 @@
     "@google-cloud/vertexai": "^0.5.0",
     "elysia": "latest",
     "firebase": "^10.10.0",
-    "firebase-admin": "^12.0.0"
+    "firebase-admin": "^12.0.0",
+    "json5": "^2.2.3"
   },
   "devDependencies": {
     "bun-types": "latest"

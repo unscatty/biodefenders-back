@@ -1,6 +1,7 @@
-import { InitialQuestionsCollection, IntialQuestion } from '@models/initial-question'
+import { InitialQuestionsCollection, InitialQuestion } from '@models/initial-question'
 import { AppOptions, cert, initializeApp } from 'firebase-admin/app'
 import { CollectionReference, getFirestore } from 'firebase-admin/firestore'
+import { Recommendation, RecommendationsCollection } from '../models'
 
 const {
   FIREBASE_CLIENT_EMAIL,
@@ -26,6 +27,12 @@ export const firestore = getFirestore(firebaseApp)
 
 export const initialQuestionsCollection = firestore.collection('initial-questions') as CollectionReference<InitialQuestionsCollection>
 
-export const addInitialQuestions = async (intialQuestions: IntialQuestion[]) => {
-  await initialQuestionsCollection.add({ initialQuestions: intialQuestions })
+export const addInitialQuestions = async (intialQuestions: InitialQuestion[]) => {
+  return initialQuestionsCollection.add({ initialQuestions: intialQuestions })
+}
+
+export const recommendationsCollection = firestore.collection('recommendations') as CollectionReference<RecommendationsCollection>
+
+export const addRecommendations = async (recommendations: Recommendation[]) => {
+  return recommendationsCollection.add({ recomendaciones: recommendations })
 }

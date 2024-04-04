@@ -1,8 +1,8 @@
-export interface IntialQuestion {
+export interface InitialQuestion {
   question: string
   answer: string
 }
 
 export interface InitialQuestionsCollection {
-  initialQuestions: IntialQuestion[]
+  initialQuestions: InitialQuestion[]
 }
