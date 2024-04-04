@@ -32,4 +32,3 @@ export const sendNotification = async (message: Message) => {
     return error
   }
 }
-

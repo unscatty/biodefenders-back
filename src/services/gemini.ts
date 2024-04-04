@@ -1,6 +1,7 @@
 import { GenerateContentRequest, HarmBlockThreshold, HarmCategory, VertexAI } from '@google-cloud/vertexai'
 import { InitialQuestion, Recommendation } from '@models'
 import { extractJsonFromText } from '@/utils/text'
+import { Quiz } from '@models/quiz'
 
 const { GCP_VERTEX_AI_PROJECT_ID, GCP_VERTEX_AI_LOCATION, GCP_VERTEX_AI_TEXT_MODEL } = process.env
 
@@ -111,4 +112,52 @@ export const generateQuestionsRecommendations = async (questions: InitialQuestio
 
   // Try to parse the response
   return extractJsonFromText(recomendacionsText) as RecommendationAndCarbonFootprint
+}
+
+export const generateQuiz = async () => {
+  const propmt = `
+  Genera una pregunta/quiz sobre temas relacionados con la huella de carbono y el medio ambiente.
+  La respuesta debe ser en el idioma español y en formato JSON. En el contexto mexicano actual.
+  Sigue el formato del siguiente ejemplo:
+  {
+    "question": "¿Qué causa principalmente el calentamiento global?", // Pregunta
+      "options": [ // Opciones de respuesta
+        "a) La rotación de la Tierra",
+        "b) La actividad volcánica",
+        "c) Las emisiones de gases de efecto invernadero",
+        "d) La lluvia ácida",
+      ],
+      "answer": "c) Las emisiones de gases de efecto invernadero", // Respuesta correcta
+  }
+  
+  `
+  const request: GenerateContentRequest = {
+    contents: [
+      {
+        parts: [{ text: propmt }],
+        role: 'user'
+      }
+    ]
+  }
+
+  const response = await generateContent(request)
+
+  // return response
+
+  const firstCandidate = response.candidates[0]
+
+  if (!firstCandidate) {
+    console.error(JSON.stringify(response, null, 2))
+    throw new Error('No se pudo generar un quiz. Intenta de nuevo.')
+  }
+
+  const quizText = firstCandidate.content.parts[0].text
+
+  if (!quizText) {
+    console.error(JSON.stringify(response, null, 2))
+    throw new Error('No se pudo generar un quiz. Intenta de nuevo.')
+  }
+
+  // Try to parse the response
+  return extractJsonFromText(quizText) as Quiz
 }
