@@ -116,7 +116,8 @@ export const generateQuestionsRecommendations = async (questions: InitialQuestio
 
 export const generateQuiz = async () => {
   const propmt = `
-  Genera una pregunta/quiz sobre temas relacionados con la huella de carbono y el medio ambiente.
+  Genera una pregunta/quiz sobre temas relacionados con la huella de carbono y el cuidado del medio ambiente.
+  También puedes incluir preguntas sobre temas relacionados con la educación ambiental.
   La respuesta debe ser en el idioma español y en formato JSON. En el contexto mexicano actual.
   Sigue el formato del siguiente ejemplo:
   {
@@ -129,7 +130,6 @@ export const generateQuiz = async () => {
       ],
       "answer": "c) Las emisiones de gases de efecto invernadero", // Respuesta correcta
   }
-  
   `
   const request: GenerateContentRequest = {
     contents: [
